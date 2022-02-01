@@ -1,0 +1,30 @@
+{
+    "form": {
+        "attributes": {
+            "action": "biblionet.php",
+            "method": "post"
+        },
+        "buttons": {
+            "submit": {
+                "title": "Criar ou atualizar registro"
+            },
+            "reset": {}
+        }
+    },
+    "fields": {
+        "helper": "",
+        "name": {
+            "size": 1000
+        },
+        "datePublished": {
+            "type": "date",
+            "picker": {
+                "format": "YYYY"
+            },
+            "manualEntry": false
+        },
+        "description": {
+            "type": "textarea"
+        }
+    }
+}

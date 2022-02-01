@@ -1,0 +1,143 @@
+{
+    "title": "Dados da obra",
+    "type": "object",
+    "properties": {
+        "rppbci_id": {
+            "type": "string",
+            "title": "ID",
+            "hidden": true
+        },
+        "type": {
+            "type": "select",
+            "title": "Tipo",
+            "enum": [
+                "Livro"
+            ],
+            "required": true
+        },
+        "name": {
+            "type": "string",
+            "title": "Título",
+            "required": true
+        },
+        "author": {
+            "title": "Autores",
+            "type": "array",
+            "items": {
+                "title": "Autor",
+                "type": "object",
+                "properties": {
+                    "person": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "title": "Nome do autor"
+                            },
+                            "birthDate": {
+                                "type": "string",
+                                "title": "Data de nascimento do autor"
+                            },
+                            "deathDate": {
+                                "type": "string",
+                                "title": "Data de morte do autor"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "publisher": {
+            "title": "Imprenta",
+            "type": "object",
+            "properties": {
+                "organization": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "title": "Editora"
+                        }
+                    }
+                }
+            }
+        },
+        "bookEdition": {
+            "type": "string",
+            "title": "Edição"
+        },
+        "doi": {
+            "type": "string",
+            "title": "DOI",
+            "pattern": "^10.*",
+            "required": false
+        },
+        "url": {
+            "type": "string",
+            "title": "URL"
+        },
+        "datePublished": {
+            "type": "date",
+            "title": "Ano da publicação",
+            "picker": {
+                "format": "YYYY"
+            }
+        },
+        "country": {
+            "title": "País de publicação",
+            "type": "string"
+        },
+        "about": {
+            "type": "array",
+            "title": "Palavras-chave"
+        },
+        "ISBN": {
+            "type": "array",
+            "title": "ISBN"
+        },
+        "description": {
+            "type": "string",
+            "title": "Resumo"
+        },
+        "itens": {
+            "title": "Exemplares",
+            "type": "array",
+            "items": {
+                "title": "Exemplar",
+                "type": "object",
+                "properties": {
+                    "digitalItem": {
+                        "type": "object",
+                        "properties": {
+                            "digitalizado": {
+                                "type": "select",
+                                "title": "Digitalizado?",
+                                "enum": [
+                                    "Sim",
+                                    "Não"
+                                ],
+                                "required": true
+                            },
+                            "url": {
+                                "type": "string",
+                                "title": "URL do documento digital"
+                            },
+                            "location": {
+                                "type": "string",
+                                "title": "Localização física"
+                            },
+                            "organization": {
+                                "type": "string",
+                                "title": "Instituição detentora"
+                            },
+                            "rights": {
+                                "type": "string",
+                                "title": "Informações sobre direitos autorais sobre a obra"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
