@@ -80,26 +80,26 @@
                     <form class="m-3" action="lattes_xml_to_elastic.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <legend>Inserir um XML do Lattes</legend>
                         <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">XML Lattes</span>
+                            <div class="input-group">
+                                <input class="form-control" type="file" id="formFile" name="file">
+                                <input type="text" placeholder="TAG" class="form-control" name="tag">
+                                <input type="text" placeholder="Núm. funcional" class="form-control" name="numfuncional">
+                                <input type="text" placeholder="Unidade" class="form-control" name="unidade">
                             </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            <div class="input-group">                                
+                                <input type="text" placeholder="Departamento" class="form-control" name="departamento">
+                                <input type="text" placeholder="Nome do PPG" class="form-control" name="ppg_nome">
+                                <input type="text" placeholder="Tipo de vínculo" class="form-control" name="tipvin">
                             </div>
-                            <input type="text" placeholder="TAG" class="form-control" name="tag">
-                            <input type="text" placeholder="Núm. funcional" class="form-control" name="numfuncional">                            
-                            <input type="text" placeholder="Unidade" class="form-control" name="unidade">
-                            <input type="text" placeholder="Departamento" class="form-control" name="departamento">
-                            <input type="text" placeholder="Nome do PPG" class="form-control" name="ppg_nome">
-                            <input type="text" placeholder="Tipo de vínculo" class="form-control" name="tipvin">
-                            <input type="text" placeholder="Genero" class="form-control" name="genero">
-                            <input type="text" placeholder="Nível" class="form-control" name="desc_nivel">
-                            <input type="text" placeholder="Curso" class="form-control" name="desc_curso">
-                            <input type="text" placeholder="Campus" class="form-control" name="campus">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Incluir</button>
-                            </div>    
+                            <div class="input-group mb-3">
+                                <input type="text" placeholder="Genero" class="form-control" name="genero">
+                                <input type="text" placeholder="Nível" class="form-control" name="desc_nivel">
+                                <input type="text" placeholder="Curso" class="form-control" name="desc_curso">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Incluir</button>
+                                </div>   
+                            </div>
+ 
                         </div>  
                     </form> 
 
@@ -125,8 +125,9 @@
                                 <span class="input-group-text">Web of Science</span>
                             </div>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            <div>
+                                <input class="form-control" type="file" id="formFile" name="file">
+                            </div>
                             </div>
                             <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
                             <div class="input-group-append">
@@ -350,7 +351,6 @@
                     <li class="list-group-item"><?php echo paginaInicial::contar_registros_indice($index); ?> registros</li> 
                     <li class="list-group-item"><?php echo paginaInicial::contar_registros_indice($index_cv);; ?> currículos</li>
                     <li class="list-group-item"><?php echo paginaInicial::contar_registros_indice($index_source); ?> registros na fonte</li>
-                    <li class="list-group-item"><?php echo paginaInicial::possui_lattes(); ?>% sem ID no Lattes</li>
                 </ul>     
             </div>
         </div>
