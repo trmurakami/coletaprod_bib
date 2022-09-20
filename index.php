@@ -55,11 +55,42 @@
     <!-- /NAV --> 
 
     <div class="jumbotron">
-        <div class="container bg-light p-5 rounded mt-5">
+        <div class="container bg-light p-5 rounded">
             <h1 class="display-5"><?php echo $branch; ?></h1>
             <p><?php echo $branch_description; ?></p>
 
             <?php isset($error_connection_message) ? print_r($error_connection_message) : "" ?>
+
+            <!-- Modal Inclusão Novo -->
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+            <!-- /Modal Inclusão Novo -->
 
             <!-- Modal Inclusão -->
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-xl">Inclusão</button>
@@ -372,7 +403,7 @@
         </div>
     </div>    
 
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-3">
                 <h2 class="uk-h3">Unidade</h2>
@@ -408,12 +439,16 @@
                     <li class="list-group-item"><?php echo paginaInicial::contar_registros_indice($index_source); ?> registros na fonte</li>
                     <li class="list-group-item"><?php echo paginaInicial::possui_lattes(); ?>% sem ID no Lattes</li>
                 </ul>     
-            </div>          
+            </div>
         </div>
     </div>
 
 
-        <?php include('inc/footer.php'); ?>
+    <?php include('inc/footer.php'); ?>
+
+    <!-- JS FILES -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
             
         
     </body>
