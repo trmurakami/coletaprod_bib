@@ -61,190 +61,131 @@
 
             <?php isset($error_connection_message) ? print_r($error_connection_message) : "" ?>
 
-            <!-- Modal Inclusão Novo -->
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Inclusão
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Inclusão</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <h1 class="display-5 mt-3">Inclusão</h1>
-
-        <form class="m-3" action="lattes_xml_to_elastic.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <legend>Inserir um XML do Lattes</legend>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">XML Lattes</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                    <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
-                </div>
-                <input type="text" placeholder="TAG" class="form-control" name="tag">
-                <input type="text" placeholder="Núm. funcional" class="form-control" name="numfuncional">                            
-                <input type="text" placeholder="Unidade" class="form-control" name="unidade">
-                <input type="text" placeholder="Departamento" class="form-control" name="departamento">
-                <input type="text" placeholder="Nome do PPG" class="form-control" name="ppg_nome">
-                <input type="text" placeholder="Tipo de vínculo" class="form-control" name="tipvin">
-                <input type="text" placeholder="Genero" class="form-control" name="genero">
-                <input type="text" placeholder="Nível" class="form-control" name="desc_nivel">
-                <input type="text" placeholder="Curso" class="form-control" name="desc_curso">
-                <input type="text" placeholder="Campus" class="form-control" name="campus">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Incluir</button>
-                </div>    
-            </div>  
-        </form> 
-
-
-        <form class="m-3" action="doi_to_elastic.php" method="get">
-            <legend>Inserir um DOI de artigo que queira incluir (sem http://doi.org/)</legend>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">DOI</span>
-                </div>
-                <input type="text" placeholder="Insira um DOI" class="form-control" name="doi" data-validation="required">
-                <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Enviar</button>
-                </div>    
-            </div>  
-        </form>
-
-        <form class="m-3" action="wos_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <legend>Enviar um arquivo da Web of Science (UTF-8, separado por tabulações)</legend>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Web of Science</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                    <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
-                </div>
-                <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                </div>    
-            </div>  
-        </form>
-
-        <form class="m-3" action="incites_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <legend>Enviar um arquivo do INCITES (CSV)</legend>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">INCITES</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                    <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
-                </div>
-                <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                </div>    
-            </div>  
-        </form>
-
-        <form class="m-3" action="scopus_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <legend>Enviar um arquivo do Scopus (CSV - All available information)</legend>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Scopus</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                    <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
-                </div>
-                <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                </div>    
-            </div>  
-        </form>
-
-        <form class="m-3" action="scival_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-            <legend>Enviar um arquivo do SCIVAL (CSV - All available information)</legend>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">SCIVAL</span>
-                </div>
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                    <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
-                </div>
-                <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Upload</button>
-                </div>    
-            </div>  
-        </form>
-        <div class="m-2">&nbsp;</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-            <!-- /Modal Inclusão Novo -->
-
             <!-- Modal Inclusão -->
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".bd-example-modal-xl">Inclusão</button>
 
-            <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#inclusao">
+                Inclusão
+            </button>
+
+            <div class="modal fade" id="inclusao" data-bs-keyboard="false" tabindex="-1" aria-labelledby="inclusaoLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
-                <div class="modal-content container">
-
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inclusaoLabel">Inclusão</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <h1 class="display-5 mt-3">Inclusão</h1>
 
-                    <!--
-                    <form action="lattes_json_to_elastic.php" method="get">
-                        <legend>Inserir um ID do Lattes</legend>
+                    <form class="m-3" action="lattes_xml_to_elastic.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <legend>Inserir um XML do Lattes</legend>
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Lattes ID</span>
+                                <span class="input-group-text">XML Lattes</span>
                             </div>
-                            <input type="text" placeholder="Insira o ID do Curriculo" class="form-control" name="id_lattes" data-validation="required">
-                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                            <input type="text" placeholder="Número funcional" class="form-control" name="numfuncional">                            
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
+                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            </div>
+                            <input type="text" placeholder="TAG" class="form-control" name="tag">
+                            <input type="text" placeholder="Núm. funcional" class="form-control" name="numfuncional">                            
                             <input type="text" placeholder="Unidade" class="form-control" name="unidade">
+                            <input type="text" placeholder="Departamento" class="form-control" name="departamento">
+                            <input type="text" placeholder="Nome do PPG" class="form-control" name="ppg_nome">
+                            <input type="text" placeholder="Tipo de vínculo" class="form-control" name="tipvin">
+                            <input type="text" placeholder="Genero" class="form-control" name="genero">
+                            <input type="text" placeholder="Nível" class="form-control" name="desc_nivel">
+                            <input type="text" placeholder="Curso" class="form-control" name="desc_curso">
+                            <input type="text" placeholder="Campus" class="form-control" name="campus">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Incluir</button>
+                            </div>    
+                        </div>  
+                    </form> 
+
+
+                    <form class="m-3" action="doi_to_elastic.php" method="get">
+                        <legend>Inserir um DOI de artigo que queira incluir (sem http://doi.org/)</legend>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">DOI</span>
+                            </div>
+                            <input type="text" placeholder="Insira um DOI" class="form-control" name="doi" data-validation="required">
+                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">Enviar</button>
                             </div>    
                         </div>  
                     </form>
-                    -->
 
-
-
-                    <!--
-                    <form class="uk-form" action="harvester_oai.php" method="get" accept-charset="utf-8" enctype="multipart/form-data">
-                        <fieldset data-uk-margin>
-                            <legend>Incluir um URL OAI-PMH</legend>
-                            <input type="text" placeholder="Insira um URL OAI válido" class="uk-form-width-medium" name="oai" data-validation="required">
-                            <input type="text" placeholder="Formato de metadados" class="uk-form-width-medium" name="metadataPrefix">
-                            <input type="text" placeholder="Set (opcional)" class="uk-form-width-medium" name="set">
-                            <input type="text" placeholder="Fonte" class="uk-form-width-medium" name="source">
-                            <input type="text" placeholder="Tag para formar um grupo" class="uk-form-width-medium" name="tag">
-                            <button class="uk-button-primary" name="btn_submit">Incluir</button><br/>                                    
-                        </fieldset>
+                    <form class="m-3" action="wos_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <legend>Enviar um arquivo da Web of Science (UTF-8, separado por tabulações)</legend>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Web of Science</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
+                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            </div>
+                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>    
+                        </div>  
                     </form>
 
-                    -->
+                    <form class="m-3" action="incites_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <legend>Enviar um arquivo do INCITES (CSV)</legend>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">INCITES</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
+                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            </div>
+                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>    
+                        </div>  
+                    </form>
+
+                    <form class="m-3" action="scopus_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <legend>Enviar um arquivo do Scopus (CSV - All available information)</legend>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Scopus</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
+                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            </div>
+                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>    
+                        </div>  
+                    </form>
+
+                    <form class="m-3" action="scival_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                        <legend>Enviar um arquivo do SCIVAL (CSV - All available information)</legend>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">SCIVAL</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
+                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                            </div>
+                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Upload</button>
+                            </div>    
+                        </div>  
+                    </form>
+                    <div class="m-2">&nbsp;</div>
                     <form class="m-3" action="openlibrary.php" method="get" accept-charset="utf-8">
                         <legend>Consulta na API do OpenLibrary</legend>
                         <div class="input-group">
@@ -277,48 +218,34 @@
                             </div>    
                         </div>
                     </form>
-                    <!--
-                    <br/>
-                    <form class="uk-form" action="grobid.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                        <fieldset data-uk-margin>
-                            <legend>PDF para Aleph Sequencial</legend>
-                            <input type="file" name="file">        
-                            <button class="uk-button-primary" name="btn_submit">Upload</button><br/>                                    
-                        </fieldset>
-                    </form>
-                    <br/>
-                    <form class="uk-form" action="grobid.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                        <fieldset data-uk-margin>
-                            <legend>URL de PDF para Aleph Sequencial</legend>
-                            <input type="text" placeholder="Insira um URL de PDF válido" class="uk-form-width-medium" name="url" data-validation="required">
-                            <button class="uk-button-primary" name="btn_submit">Incluir</button><br/>                         
-                        </fieldset>
-                    </form>
-                    <br/>
-                    <form class="uk-form" action="grobidtojats.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                        <fieldset data-uk-margin>
-                            <legend>PDF para JATS</legend>
-                            <input type="file" name="file">        
-                            <button class="uk-button-primary" name="btn_submit">Upload</button><br/>                                    
-                        </fieldset>
-                    </form>
-                    <br/>
 
-                    -->
-                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
                 </div>
             </div>
             </div>
 
+            <!-- /Modal Inclusão -->
 
-            <!-- Modal Inclusão -->
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#source">Fonte para comparativo</button>
+ 
+            <!-- Modal Fonte -->
 
-            <div class="modal fade bd-example-modal-x1" id="source" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content container">
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#fonte">
+                Fonte para comparativo
+            </button>
 
+            <div class="modal fade" id="fonte" data-bs-keyboard="false" tabindex="-1" aria-labelledby="fonteLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fonteLabel">Fonte para comparativo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <h1 class="display-5 mt-3">Fonte para comparativo</h1>
+
 
                     <form class="m-3" action="tools/harvester_source.php" method="get">
                         <legend>Harvesting OAI-PMH</legend>
@@ -338,35 +265,19 @@
                                 <button class="btn btn-primary" type="submit">Coletar OAI</button>
                             </div>    
                         </div>  
-                    </form>
+                    </form>                    
 
-                    <!--
-                    <form class="m-3" action="wos_upload.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-                        <legend>Upload MARC</legend>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">MARC</span>
-                            </div>
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
-                            </div>
-                            <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Upload</button>
-                            </div>    
-                        </div>  
-                    </form>
-                    -->                 
-                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
                 </div>
             </div>
-            </div>            
+            </div>
+
+            <!-- /Modal Fonte -->       
 
             <a class="btn btn-info" href="result_source.php">Ver registros na fonte</a>
-
-
-
 
 
             <form class="mt-3" action="result.php">
