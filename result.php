@@ -4,16 +4,6 @@
 require 'inc/config.php'; 
 require 'inc/functions.php';
 
-if (!empty($_POST)) {
-    foreach ($_POST as $key=>$value) {            
-        $var_concluido["doc"]["concluido"] = $value;
-        $var_concluido["doc"]["doc_as_upsert"] = true; 
-        Elasticsearch::update($key, $var_concluido);
-    }
-    sleep(6);
-    header("Refresh:0");
-}
-
 if (isset($_GET["filter"])) {
     if (!in_array("type:\"Work\"", $_GET["filter"])) {
         $_GET["filter"][] = "type:\"Work\"";
@@ -150,29 +140,7 @@ $get_data = $_GET;
 
            
 
-                                    <div class="btn-group mt-3" role="group" aria-label="Botoes">
-
-                                        <form method="post">
-                                            <?php if(isset($r["_source"]["concluido"])) : ?>
-                                                <?php if($r["_source"]["concluido"] == "Sim") : ?>                                                  
-                                                    
-                                                        <label><input type='hidden' value='Não' name="<?php echo $r['_id'];?>"></label>      
-                                                        <button class="btn btn-primary">Desmarcar como concluído</button>
-                                                
-                                                <?php else : ?>
-                                                    
-                                                        <label><input type='hidden' value='Sim' name="<?php echo $r['_id'];?>"></label>
-                                                        <button class="btn btn-primary">Marcar como concluído</button>
-                                                    
-                                                <?php endif; ?>                                    
-                                            <?php else : ?>
-                                                    
-                                                        <label><input type='hidden' value='Sim' name="<?php echo $r['_id'];?>"></label>
-                                                        <button class="btn btn-primary">Marcar como concluído</button>
-                                                    
-                                            <?php endif; ?>
-                                            
-                                        </form>                                       
+                                    <div class="btn-group mt-3" role="group" aria-label="Botoes">                            
                                         
                                         <?php                                        
                                         if (isset($dspaceRest)) { 
@@ -251,10 +219,10 @@ $get_data = $_GET;
                     $facets->facet("Lattes.flagRelevancia",100,"Relevância",null,"_term",$_GET);
                     $facets->facet("Lattes.flagDivulgacaoCientifica",100,"Divulgação científica",null,"_term",$_GET);
                     
-                    $facets->facet("area_do_conhecimento.nomeGrandeAreaDoConhecimento", 100, "Nome da Grande Área do Conhecimento", null, "_term", $_GET);
-                    $facets->facet("area_do_conhecimento.nomeDaAreaDoConhecimento", 100, "Nome da Área do Conhecimento", null, "_term", $_GET);
-                    $facets->facet("area_do_conhecimento.nomeDaSubAreaDoConhecimento", 100, "Nome da Sub Área do Conhecimento", null, "_term", $_GET);
-                    $facets->facet("area_do_conhecimento.nomeDaEspecialidade", 100, "Nome da Especialidade", null, "_term", $_GET);
+                    //$facets->facet("area_do_conhecimento.nomeGrandeAreaDoConhecimento", 100, "Nome da Grande Área do Conhecimento", null, "_term", $_GET);
+                    //$facets->facet("area_do_conhecimento.nomeDaAreaDoConhecimento", 100, "Nome da Área do Conhecimento", null, "_term", $_GET);
+                    //$facets->facet("area_do_conhecimento.nomeDaSubAreaDoConhecimento", 100, "Nome da Sub Área do Conhecimento", null, "_term", $_GET);
+                    //$facets->facet("area_do_conhecimento.nomeDaEspecialidade", 100, "Nome da Especialidade", null, "_term", $_GET);
                     
                     $facets->facet("trabalhoEmEventos.classificacaoDoEvento", 100, "Classificação do evento", null, "_term", $_GET); 
                     $facets->facet("EducationEvent.name", 100, "Nome do evento", null, "_term", $_GET);
@@ -269,7 +237,6 @@ $get_data = $_GET;
                     
                     $facets->facet("isPartOf.name", 100, "Título do periódico", null, "_term", $_GET);
 
-                    $facets->facet("concluido", 100, "Concluído", null, "_term", $_GET);
                     $facets->facet("bdpi.existe", 100, "Está na FONTE?", null, "_term", $_GET);
 
                 ?>
