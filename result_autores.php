@@ -76,11 +76,10 @@ $get_data = $_GET;
 
         <!-- NAV -->
         <?php require 'inc/navbar.php'; ?>
-        <!-- /NAV -->
-        <br/><br/><br/><br/>
+        <!-- /NAV -->        
 
         <main role="main">
-            <div class="container">
+            <div class="container mt-3">
 
             <div class="row">
                 <div class="col-8">    
@@ -119,6 +118,7 @@ $get_data = $_GET;
                 <hr>
                 <h3>Refinar meus resultados</h3>    
                 <hr>
+                <div class="accordion accordion-flush" id="facets">
                 <?php
                     $facets = new facets();
                     $facets->query = $result_get['query'];
@@ -168,7 +168,7 @@ $get_data = $_GET;
                     $facets->facet("data_atualizacao", 100, "Data de atualização do currículo", null, "_term", $_GET, $index_cv);
 
                 ?>
-                </ul>
+                </div>
                 <!-- Limitar por data - Início -->
                 <form action="result.php?" method="GET">
                     <h5 class="mt-3">Filtrar por ano de publicação</h5>

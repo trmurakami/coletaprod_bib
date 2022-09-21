@@ -219,8 +219,7 @@ $get_data = $_GET;
                 <h3>Refinar meus resultados</h3>    
                 <hr>
 
-                <div class="accordion accordion-flush" id="facets">        
-
+                <div class="accordion accordion-flush" id="facets">
 
                 <?php
                     $facets = new facets();
@@ -276,8 +275,7 @@ $get_data = $_GET;
                 ?>
 
                 </div>
-
-                </ul>
+                
                 <!-- Limitar por data - Início -->
                 <form action="result.php?" method="GET">
                     <h5 class="mt-3">Filtrar por ano de publicação</h5>
