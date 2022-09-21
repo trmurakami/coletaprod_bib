@@ -1,4 +1,4 @@
-# coletaprod
+# coletaprod_bib
 Extração e navegação de registros para a Coleta de Produção Científica das Instituições. 
 
 Fontes possíveis: 
@@ -14,7 +14,7 @@ Fontes possíveis:
 
 ## Clonar repositórios
 
-git clone https://github.com/trmurakami/coletaprod.git
+git clone https://github.com/trmurakami/coletaprod_bib.git
 
 ## Instalação
 
@@ -33,14 +33,6 @@ Editar suas configurações em config.php
 ## Criar indices
 
 Rodar o sistema pela primeira vez para criar os indices
-
-## Comandos para rodar via linha de comando (Se necessário)
-
-php5-cgi -f lattes_json_to_elastic.php id_lattes=XXXXXXXX
-
-php5-cgi -f lattes_json_to_elastic.php path_download=XXXXXXXX
-
-php5-cgi -f lattes_json_to_elastic.php id_lattes=XXXXX tag[]=XXXX unidade[]=XXX numfuncional=XXXXXX
 
 ## Rodar documentação
 
