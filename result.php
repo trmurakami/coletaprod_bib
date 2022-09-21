@@ -204,10 +204,15 @@ $get_data = $_GET;
                     $facets->facet("match.string", 100, "Tag de correspondência", null, "_term", $_GET);
                     
                     $facets->facet("author.person.name", 100, "Nome completo do autor", null, "_term", $_GET);
-                    $facets->facet("lattes_ids", 100, "Número do lattes", null, "_term", $_GET);                    
+                    $facets->facet("lattes_ids", 100, "Número do lattes", null, "_term", $_GET);
+                    $facets->facet("ppg_nome",100,"PPG",null,"_term",$_GET);                   
                     $facets->facet("instituicao.unidade",100,"Unidade",null,"_term",$_GET);
                     $facets->facet("instituicao.departamento",100,"Departamento",null,"_term",$_GET);
                     $facets->facet("instituicao.tipvin", 100, "Tipo de vínculo", null, "_term", $_GET);
+                    $facets->facet("instituicao.numfuncional", 100, "Número funcional", null, "_term", $_GET);
+                    $facets->facet("genero",100,"Gênero",null,"_term",$_GET);
+                    $facets->facet("desc_nivel",100,"Nível",null,"_term",$_GET);
+                    $facets->facet("desc_curso",100,"Curso",null,"_term",$_GET);
                     
                     $facets->facet("country",200,"País de publicação",null,"_term",$_GET);
                     $facets->facet("datePublished",120,"Ano de publicação","desc","_term",$_GET);
@@ -226,8 +231,6 @@ $get_data = $_GET;
                     
                     $facets->facet("trabalhoEmEventos.classificacaoDoEvento", 100, "Classificação do evento", null, "_term", $_GET); 
                     $facets->facet("EducationEvent.name", 100, "Nome do evento", null, "_term", $_GET);
-                    $facets->facet("publisher.organization.location", 100, "Cidade do evento", null, "_term", $_GET);
-                    $facets->facet("trabalhoEmEventos.anoDeRealizacao", 100, "Ano de realização do evento", null, "_term", $_GET);
                     $facets->facet("trabalhoEmEventos.tituloDosAnaisOuProceedings", 100, "Título dos anais", null, "_term", $_GET);
                     $facets->facet("trabalhoEmEventos.isbn", 100, "ISBN dos anais", null, "_term", $_GET);
                     $facets->facet("trabalhoEmEventos.nomeDaEditora", 100, "Editora dos anais", null, "_term", $_GET);
