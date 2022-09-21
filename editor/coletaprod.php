@@ -11,8 +11,8 @@ if (file_exists('../inc/config.php')) {
     include '../inc/config.php';
 }
 
-if (file_exists('../elasticfind/elasticfind.php')) {
-    include '../elasticfind/elasticfind.php';
+if (file_exists('../elasticfind_coletaprod/elasticfind.php')) {
+    include '../elasticfind_coletaprod/elasticfind.php';
 }
 
 if (isset($_REQUEST["delete_id"])) {
@@ -82,6 +82,6 @@ print_r($_REQUEST["coletaprod_id"]);
 $upsert = Elasticsearch::update($_REQUEST["coletaprod_id"], $body);
 print_r($upsert);
 
-//header("Location: ../index.php");
+sleep(5); echo '<script>window.location = \'../index.php\'</script>';
 
 ?>
