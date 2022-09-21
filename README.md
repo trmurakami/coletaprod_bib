@@ -26,6 +26,10 @@ git submodule init
 
 git submodule update
 
+cd editor
+
+composer install
+
 ## Configurar o arquivo inc/config.php
 
 Editar suas configurações em config.php
