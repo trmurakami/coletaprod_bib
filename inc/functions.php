@@ -3,12 +3,12 @@
  * Arquivo de classes e funções do ColetaProd
  */
 include('config.php');
-if (file_exists('elasticfind/elasticfind.php')) {
-    include 'elasticfind/elasticfind.php';
-} elseif (file_exists('../elasticfind/elasticfind.php')) {
-    include '../elasticfind/elasticfind.php';
+if (file_exists('elasticfind_coletaprod/elasticfind.php')) {
+    include 'elasticfind_coletaprod/elasticfind.php';
+} elseif (file_exists('../elasticfind_coletaprod/elasticfind.php')) {
+    include '../elasticfind_coletaprod/elasticfind.php';
 } else {
-    include '../../elasticfind/elasticfind.php';
+    include '../../elasticfind_coletaprod/elasticfind.php';
 }
 
 /* Connect to Elasticsearch - Index */

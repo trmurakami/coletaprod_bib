@@ -434,99 +434,141 @@ class Facets
 
         $response = Elasticsearch::search(null, 0, $query, $alternative_index);
 
-        $result_count = count($response["aggregations"]["counts"]["buckets"]);        
+        $result_count = count($response["aggregations"]["counts"]["buckets"]);
 
-        if ($result_count == 0) {
 
-        } elseif (($result_count != 0) && ($result_count < 5)) {
 
-            if (($result_count == 1) && ($response["aggregations"]["counts"]["buckets"][0]["key"] == "")) {
 
-            } else {
-                echo '<a href="#" class="list-group-item list-group-item-action active">'.$field_name.'</a>';
-                echo '<ul class="list-group list-group-flush">';
+
+        if ($result_count !== 0) {
+
+            $sha256 = hash('sha256', $field_name);
+
+            echo '<div class="accordion-item">';
+            echo '<h2 class="accordion-header" id="flush-heading'.$sha256.'">';
+            echo '
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse'.$sha256.'" aria-expanded="false" aria-controls="flush-collapse'.$sha256.'">
+                    '.$field_name.'
+                </button>
+            ';
+            echo '</h2>';
+            echo '
+                <div id="flush-collapse'.$sha256.'" class="accordion-collapse collapse" aria-labelledby="flush-heading'.$sha256.'" data-bs-parent="#facets">
+                    <div class="accordion-body">';
+            echo '<ul class="list-group list-group-flush">';
                 foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
                     if ($facets['key'] == "Não preenchido") {
-                        echo '<li>';
-                        echo '<div uk-grid>
-                                <div class="uk-width-expand" style="color:#333">
-                                    <a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$facets['key'].'</a>
-                                </div>
-                                <div class="uk-width-auto" style="color:#333">
-                                    <span class="uk-badge" style="font-size:80%">'.number_format($facets['doc_count'], 0, ',', '.').'</span>
-                                </div>';
-                        echo '</div></li>';
+                        echo '<li class="list-group-item">';
+                        echo '<a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$facets['key'].'</a>
+                        <span class="badge bg-primary">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '</li>';
                     } else {
-                        echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                        echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
-                        <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '<li class="list-group-item">';
+                        echo '<div class="row">';
+                        echo '<div class="col">';
+                        echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>';
+                        echo '</div>';
+                        echo '<div class="col-md-auto">';
+                        echo '<span class="badge bg-primary">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '</div>';
                         echo '</li>'; 
                     }
-    
-                };
-                echo '</ul>';
-            }
-
-
-
-        } else {
-            $i = 0;
-            echo '<a href="#" class="list-group-item list-group-item-action active">'.$field_name.'</a>';
-            echo '<ul class="list-group list-group-flush">';  
-            while ($i < 5) {
-                if ($response["aggregations"]["counts"]["buckets"][$i]['key'] == "Não preenchido") {
-                    echo '<li>';
-                    echo '<div uk-grid>
-                            <div class="uk-width-expand uk-text-small" style="color:#333">
-                                <a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
-                            </div>
-                            <div class="uk-width-auto" style="color:#333">
-                            <span class="uk-badge" style="font-size:80%">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>
-                            </div>';
-                    echo '</div></li>';
-                } else {
-                    echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                    echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
-                    <span class="badge badge-primary badge-pill">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>';
-                    echo '</li>';                   
                 }
-                $i++;                
-            }
-
-
-            echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-            echo '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.str_replace(".", "", $field).'Modal">mais >>></button>  ';
-            echo '</li>';
             echo '</ul>';
-            echo '<div class="modal fade" id="'.str_replace(".", "", $field).'Modal" tabindex="-1" role="dialog" aria-labelledby="'.str_replace(".", "", $field).'ModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="'.$field.'ModalLabel">'.$field_name.'</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+            
+            echo '  </div>
                 </div>
-                <div class="modal-body">
-                    <ul class="list-group list-group-flush">';
-                    foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
-                        echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-                        echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
-                            <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
-                        echo '</li>';
-                    }
-            echo '</ul>';
-             echo '
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-                </div>
-            </div></div></div>
-            ';         
-
-
+            ';
+            echo '</div>';
         }
-        echo '</li>';
+       
+
+
+
+        //         echo '<a href="#" class="list-group-item list-group-item-action active">'.$field_name.'</a>';
+        //         echo '<ul class="list-group list-group-flush">';
+        //         foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
+        //             if ($facets['key'] == "Não preenchido") {
+        //                 echo '<li>';
+        //                 echo '<div uk-grid>
+        //                         <div class="uk-width-expand" style="color:#333">
+        //                             <a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$facets['key'].'</a>
+        //                         </div>
+        //                         <div class="uk-width-auto" style="color:#333">
+        //                             <span class="uk-badge" style="font-size:80%">'.number_format($facets['doc_count'], 0, ',', '.').'</span>
+        //                         </div>';
+        //                 echo '</div></li>';
+        //             } else {
+        //                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+        //                 echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
+        //                 <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+        //                 echo '</li>'; 
+        //             }
+    
+        //         };
+        //         echo '</ul>';
+        //     }
+
+
+
+        // } else {
+        //     $i = 0;
+        //     echo '<a href="#" class="list-group-item list-group-item-action active">'.$field_name.'</a>';
+        //     echo '<ul class="list-group list-group-flush">';  
+        //     while ($i < 5) {
+        //         if ($response["aggregations"]["counts"]["buckets"][$i]['key'] == "Não preenchido") {
+        //             echo '<li>';
+        //             echo '<div uk-grid>
+        //                     <div class="uk-width-expand uk-text-small" style="color:#333">
+        //                         <a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
+        //                     </div>
+        //                     <div class="uk-width-auto" style="color:#333">
+        //                     <span class="uk-badge" style="font-size:80%">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>
+        //                     </div>';
+        //             echo '</div></li>';
+        //         } else {
+        //             echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+        //             echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
+        //             <span class="badge badge-primary badge-pill">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>';
+        //             echo '</li>';                   
+        //         }
+        //         $i++;                
+        //     }
+
+
+        //     echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+        //     echo '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.str_replace(".", "", $field).'Modal">mais >>></button>  ';
+        //     echo '</li>';
+        //     echo '</ul>';
+        //     echo '<div class="modal fade" id="'.str_replace(".", "", $field).'Modal" tabindex="-1" role="dialog" aria-labelledby="'.str_replace(".", "", $field).'ModalLabel" aria-hidden="true">
+        //     <div class="modal-dialog" role="document">
+        //         <div class="modal-content">
+        //         <div class="modal-header">
+        //             <h5 class="modal-title" id="'.$field.'ModalLabel">'.$field_name.'</h5>
+        //             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        //             <span aria-hidden="true">&times;</span>
+        //             </button>
+        //         </div>
+        //         <div class="modal-body">
+        //             <ul class="list-group list-group-flush">';
+        //             foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
+        //                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+        //                 echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
+        //                     <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+        //                 echo '</li>';
+        //             }
+        //     echo '</ul>';
+        //      echo '
+        //         <div class="modal-footer">
+        //             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        //         </div>
+        //         </div>
+        //     </div></div></div>
+        //     ';         
+
+
+        // }
+        // echo '</li>';
 
     }
 

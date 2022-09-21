@@ -218,6 +218,10 @@ $get_data = $_GET;
                 <hr>
                 <h3>Refinar meus resultados</h3>    
                 <hr>
+
+                <div class="accordion accordion-flush" id="facets">        
+
+
                 <?php
                     $facets = new facets();
                     $facets->query = $result_get['query'];
@@ -270,6 +274,9 @@ $get_data = $_GET;
                     $facets->facet("bdpi.existe", 100, "Está na FONTE?", null, "_term", $_GET);
 
                 ?>
+
+                </div>
+
                 </ul>
                 <!-- Limitar por data - Início -->
                 <form action="result.php?" method="GET">
