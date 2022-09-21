@@ -436,10 +436,6 @@ class Facets
 
         $result_count = count($response["aggregations"]["counts"]["buckets"]);
 
-
-
-
-
         if ($result_count !== 0) {
 
             $sha256 = hash('sha256', $field_name);
@@ -480,95 +476,7 @@ class Facets
                 </div>
             ';
             echo '</div>';
-        }
-       
-
-
-
-        //         echo '<a href="#" class="list-group-item list-group-item-action active">'.$field_name.'</a>';
-        //         echo '<ul class="list-group list-group-flush">';
-        //         foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
-        //             if ($facets['key'] == "Não preenchido") {
-        //                 echo '<li>';
-        //                 echo '<div uk-grid>
-        //                         <div class="uk-width-expand" style="color:#333">
-        //                             <a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$facets['key'].'</a>
-        //                         </div>
-        //                         <div class="uk-width-auto" style="color:#333">
-        //                             <span class="uk-badge" style="font-size:80%">'.number_format($facets['doc_count'], 0, ',', '.').'</span>
-        //                         </div>';
-        //                 echo '</div></li>';
-        //             } else {
-        //                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-        //                 echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
-        //                 <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
-        //                 echo '</li>'; 
-        //             }
-    
-        //         };
-        //         echo '</ul>';
-        //     }
-
-
-
-        // } else {
-        //     $i = 0;
-        //     echo '<a href="#" class="list-group-item list-group-item-action active">'.$field_name.'</a>';
-        //     echo '<ul class="list-group list-group-flush">';  
-        //     while ($i < 5) {
-        //         if ($response["aggregations"]["counts"]["buckets"][$i]['key'] == "Não preenchido") {
-        //             echo '<li>';
-        //             echo '<div uk-grid>
-        //                     <div class="uk-width-expand uk-text-small" style="color:#333">
-        //                         <a href="result.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
-        //                     </div>
-        //                     <div class="uk-width-auto" style="color:#333">
-        //                     <span class="uk-badge" style="font-size:80%">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>
-        //                     </div>';
-        //             echo '</div></li>';
-        //         } else {
-        //             echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-        //             echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $response["aggregations"]["counts"]["buckets"][$i]['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$response["aggregations"]["counts"]["buckets"][$i]['key'].'</a>
-        //             <span class="badge badge-primary badge-pill">'.number_format($response["aggregations"]["counts"]["buckets"][$i]['doc_count'], 0, ',', '.').'</span>';
-        //             echo '</li>';                   
-        //         }
-        //         $i++;                
-        //     }
-
-
-        //     echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-        //     echo '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#'.str_replace(".", "", $field).'Modal">mais >>></button>  ';
-        //     echo '</li>';
-        //     echo '</ul>';
-        //     echo '<div class="modal fade" id="'.str_replace(".", "", $field).'Modal" tabindex="-1" role="dialog" aria-labelledby="'.str_replace(".", "", $field).'ModalLabel" aria-hidden="true">
-        //     <div class="modal-dialog" role="document">
-        //         <div class="modal-content">
-        //         <div class="modal-header">
-        //             <h5 class="modal-title" id="'.$field.'ModalLabel">'.$field_name.'</h5>
-        //             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        //             <span aria-hidden="true">&times;</span>
-        //             </button>
-        //         </div>
-        //         <div class="modal-body">
-        //             <ul class="list-group list-group-flush">';
-        //             foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
-        //                 echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
-        //                 echo '<a href="result.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>
-        //                     <span class="badge badge-primary badge-pill">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
-        //                 echo '</li>';
-        //             }
-        //     echo '</ul>';
-        //      echo '
-        //         <div class="modal-footer">
-        //             <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        //         </div>
-        //         </div>
-        //     </div></div></div>
-        //     ';         
-
-
-        // }
-        // echo '</li>';
+        }      
 
     }
 
