@@ -71,10 +71,8 @@ $get_data = $_GET;
         <!-- NAV -->
         <?php require 'inc/navbar.php'; ?>
         <!-- /NAV -->
-        <br/><br/><br/><br/>
-
         <main role="main">
-            <div class="container">
+            <div class="container mt-3">
 
             <div class="row">
                 <div class="col-8">    
