@@ -125,9 +125,7 @@
                                 <span class="input-group-text">Web of Science</span>
                             </div>
                             <div class="custom-file">
-                            <div>
                                 <input class="form-control" type="file" id="formFile" name="file">
-                            </div>
                             </div>
                             <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
                             <div class="input-group-append">
@@ -143,8 +141,7 @@
                                 <span class="input-group-text">INCITES</span>
                             </div>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                                <input class="form-control" type="file" id="formFile" name="file">
                             </div>
                             <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
                             <div class="input-group-append">
@@ -160,8 +157,7 @@
                                 <span class="input-group-text">Scopus</span>
                             </div>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                                <input class="form-control" type="file" id="formFile" name="file">
                             </div>
                             <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
                             <div class="input-group-append">
@@ -177,8 +173,7 @@
                                 <span class="input-group-text">SCIVAL</span>
                             </div>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="fileXML" aria-describedby="fileXML" name="file">
-                                <label class="custom-file-label" for="fileXML">Escolha o arquivo</label>
+                                <input class="form-control" type="file" id="formFile" name="file">
                             </div>
                             <input type="text" placeholder="TAG para formar um grupo" class="form-control" name="tag">
                             <div class="input-group-append">
@@ -186,40 +181,6 @@
                             </div>    
                         </div>  
                     </form>
-                    <div class="m-2">&nbsp;</div>
-                    <form class="m-3" action="openlibrary.php" method="get" accept-charset="utf-8">
-                        <legend>Consulta na API do OpenLibrary</legend>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">API</span>
-                            </div>
-                                <input type="text" placeholder="Insira um ISBN válido" class="form-control" name="isbn" size="13"><br/>
-                                <input type="text" placeholder="Ou codigo do OpenLibrary" class="form-control" name="sysno" size="13"><br/>
-                                <input type="text" placeholder="Ou pesquisar por título" class="form-control" name="title" size="200"><br/>
-                                <input type="text" placeholder="e autor" class="form-control" name="author" size="100"><br/>
-                                <input type="text" placeholder="e ano" class="form-control" name="year" size="4"><br/>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Pesquisar no OpenLibrary</button>
-                            </div>    
-                        </div>
-                    </form>                    
-                    <form class="m-3" action="z3950.php" method="get" accept-charset="utf-8">
-                        <legend>Consulta no Z39.50</legend>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Z39.50</span>
-                            </div>
-                                <input type="text" placeholder="Insira um ISBN válido" class="form-control" name="isbn" size="13"><br/>
-                                <input type="text" placeholder="Ou número do sistema" class="form-control" name="sysno" size="13"><br/>
-                                <input type="text" placeholder="Ou pesquisar por título" class="form-control" name="title" size="200"><br/>
-                                <input type="text" placeholder="e autor" class="form-control" name="author" size="100"><br/>
-                                <input type="text" placeholder="e ano" class="form-control" name="year" size="4"><br/>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Pesquisa Z39.50</button>
-                            </div>    
-                        </div>
-                    </form>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
