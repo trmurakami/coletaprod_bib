@@ -181,6 +181,14 @@
                             </div>    
                         </div>  
                     </form>
+
+                    <hr/>
+                    <h2 class="t t-h3">Excluir índices</h2>
+                    <div class="alert alert-danger" role="alert">
+                        Excluir todos os dados! Atenção, essa tarefa é irreversível! <a href="tools/delete_all_indexes.php">Clique aqui</a>
+                    </div>
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
