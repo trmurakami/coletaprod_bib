@@ -152,6 +152,7 @@ $get_data = $_GET;
                 <hr>
                 <h3>Refinar meus resultados</h3>    
                 <hr>
+                <div class="accordion accordion-flush" id="facets">
                 <?php
                     $facets = new facets();
                     $facets->query = $result_get['query'];
@@ -160,17 +161,17 @@ $get_data = $_GET;
                         $_GET = null;                                    
                     }                       
                     
-                    $facets->facet("tipo", 100, "Tipo de material", null, "_term", $_GET, $index_source);
-                    $facets->facet("author.person.name", 100, "Nome completo do autor", null, "_term", $_GET, $index_source);
-                    $facets->facet("datePublished", 120, "Ano de publicação", "desc", "_term", $_GET, $index_source);
-                    $facets->facet("language", 40, "Idioma", null, "_term", $_GET, $index_source);
-                    $facets->facet("about", 100, "Palavras-chave", null, "_term", $_GET, $index_source);
-                    $facets->facet("publisher.organization.name", 100, "Editora", null, "_term", $_GET, $index_source);
-                    $facets->facet("isPartOf.name", 100, "Título do periódico", null, "_term", $_GET, $index_source);
-                    $facets->facet("isPartOf.issn", 50, "ISSN", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("tipo", 100, "Tipo de material", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("author.person.name", 100, "Nome completo do autor", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("datePublished", 120, "Ano de publicação", "desc", "_term", $_GET, $index_source);
+                    $facets->facetsource("language", 40, "Idioma", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("about", 100, "Palavras-chave", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("publisher.organization.name", 100, "Editora", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("isPartOf.name", 100, "Título do periódico", null, "_term", $_GET, $index_source);
+                    $facets->facetsource("isPartOf.issn", 50, "ISSN", null, "_term", $_GET, $index_source);
 
                 ?>
-                </ul>
+                </div>
                 <!-- Limitar por data - Início -->
                 <form action="result.php?" method="GET">
                     <h5 class="mt-3">Filtrar por ano de publicação</h5>

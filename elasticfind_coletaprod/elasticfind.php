@@ -480,6 +480,138 @@ class Facets
 
     }
 
+    public function facetperson($field, $size, $field_name, $sort, $sort_type, $get_search, $alternative_index = null)
+    {
+        global $url_base;
+
+        if (isset($get_search["page"])) {
+            unset($get_search["page"]);            
+        }
+
+        $query = $this->query;
+        $query["aggs"]["counts"]["terms"]["field"] = "$field.keyword";
+        if (!empty($_SESSION['oauthuserdata'])) {
+            $query["aggs"]["counts"]["terms"]["missing"] = "Não preenchido";
+        }
+        if (isset($sort)) {
+            $query["aggs"]["counts"]["terms"]["order"][$sort_type] = $sort;
+        }
+        $query["aggs"]["counts"]["terms"]["size"] = $size;
+
+        $response = Elasticsearch::search(null, 0, $query, $alternative_index);
+
+        $result_count = count($response["aggregations"]["counts"]["buckets"]);
+
+        if ($result_count !== 0) {
+
+            $sha256 = hash('sha256', $field_name);
+
+            echo '<div class="accordion-item">';
+            echo '<h2 class="accordion-header" id="flush-heading'.$sha256.'">';
+            echo '
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse'.$sha256.'" aria-expanded="false" aria-controls="flush-collapse'.$sha256.'">
+                    '.$field_name.'
+                </button>
+            ';
+            echo '</h2>';
+            echo '
+                <div id="flush-collapse'.$sha256.'" class="accordion-collapse collapse" aria-labelledby="flush-heading'.$sha256.'" data-bs-parent="#facets">
+                    <div class="accordion-body">';
+            echo '<ul class="list-group list-group-flush">';
+                foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
+                    if ($facets['key'] == "Não preenchido") {
+                        echo '<li class="list-group-item">';
+                        echo '<a href="result_autores.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$facets['key'].'</a>
+                        <span class="badge bg-primary">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '</li>';
+                    } else {
+                        echo '<li class="list-group-item">';
+                        echo '<div class="row">';
+                        echo '<div class="col">';
+                        echo '<a href="result_autores.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>';
+                        echo '</div>';
+                        echo '<div class="col-md-auto">';
+                        echo '<span class="badge bg-primary">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '</div>';
+                        echo '</li>'; 
+                    }
+                }
+            echo '</ul>';
+            
+            echo '  </div>
+                </div>
+            ';
+            echo '</div>';
+        }      
+
+    }
+
+    public function facetsource($field, $size, $field_name, $sort, $sort_type, $get_search, $alternative_index = null)
+    {
+        global $url_base;
+
+        if (isset($get_search["page"])) {
+            unset($get_search["page"]);            
+        }
+
+        $query = $this->query;
+        $query["aggs"]["counts"]["terms"]["field"] = "$field.keyword";
+        if (!empty($_SESSION['oauthuserdata'])) {
+            $query["aggs"]["counts"]["terms"]["missing"] = "Não preenchido";
+        }
+        if (isset($sort)) {
+            $query["aggs"]["counts"]["terms"]["order"][$sort_type] = $sort;
+        }
+        $query["aggs"]["counts"]["terms"]["size"] = $size;
+
+        $response = Elasticsearch::search(null, 0, $query, $alternative_index);
+
+        $result_count = count($response["aggregations"]["counts"]["buckets"]);
+
+        if ($result_count !== 0) {
+
+            $sha256 = hash('sha256', $field_name);
+
+            echo '<div class="accordion-item">';
+            echo '<h2 class="accordion-header" id="flush-heading'.$sha256.'">';
+            echo '
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse'.$sha256.'" aria-expanded="false" aria-controls="flush-collapse'.$sha256.'">
+                    '.$field_name.'
+                </button>
+            ';
+            echo '</h2>';
+            echo '
+                <div id="flush-collapse'.$sha256.'" class="accordion-collapse collapse" aria-labelledby="flush-heading'.$sha256.'" data-bs-parent="#facets">
+                    <div class="accordion-body">';
+            echo '<ul class="list-group list-group-flush">';
+                foreach ($response["aggregations"]["counts"]["buckets"] as $facets) {
+                    if ($facets['key'] == "Não preenchido") {
+                        echo '<li class="list-group-item">';
+                        echo '<a href="result_source.php?'.http_build_query($get_search).'&search=(-_exists_:'.$field.')">'.$facets['key'].'</a>
+                        <span class="badge bg-primary">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '</li>';
+                    } else {
+                        echo '<li class="list-group-item">';
+                        echo '<div class="row">';
+                        echo '<div class="col">';
+                        echo '<a href="result_source.php?'.http_build_query($get_search).'&filter[]='.$field.':&quot;'.str_replace('&', '%26', $facets['key']).'&quot;"  title="E" style="color:#0040ff;font-size: 90%">'.$facets['key'].'</a>';
+                        echo '</div>';
+                        echo '<div class="col-md-auto">';
+                        echo '<span class="badge bg-primary">'.number_format($facets['doc_count'], 0, ',', '.').'</span>';
+                        echo '</div>';
+                        echo '</li>'; 
+                    }
+                }
+            echo '</ul>';
+            
+            echo '  </div>
+                </div>
+            ';
+            echo '</div>';
+        }      
+
+    }
+
     public function facetExistsField($field, $size, $field_name, $sort, $sort_type, $get_search, $open = false)
     {
         global $url_base;
