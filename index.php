@@ -300,7 +300,11 @@
                 <h2>Tags</h2>
                 <ul class="list-group">
                     <?php paginaInicial::unidade_inicio("tag"); ?>
-                </ul>                        
+                </ul>
+                <h2>PPGs</h2>
+                <ul class="list-group">
+                    <?php paginaInicial::unidade_inicio("ppg_nome"); ?>
+                </ul>                     
             </div>
             <div class="col-md-3">
                 <h2 class="uk-h3">Tipo de material</h2>
