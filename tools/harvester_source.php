@@ -327,6 +327,8 @@ if (isset($_GET["oai"])) {
 
         }
 
+        sleep(5); echo '<script>window.location = \'../index.php\'</script>';
+
     } elseif ($_GET["metadataFormat"] == "rfc1807") {
 
         $recs = $myEndpoint->listRecords('rfc1807');
@@ -413,6 +415,8 @@ if (isset($_GET["oai"])) {
 
             }
         }
+
+        sleep(5); echo '<script>window.location = \'../index.php\'</script>';
 
     } elseif ($_GET["metadataFormat"] == "dim") {
         if (isset($_GET["set"])) {
@@ -517,7 +521,9 @@ if (isset($_GET["oai"])) {
             unset($record);
             flush();
             //break;
-        }        
+        }
+        
+        sleep(5); echo '<script>window.location = \'../index.php\'</script>';
 
     } else {
         echo "Formato de metadados não definido"; 
